@@ -5,7 +5,7 @@ const app = express();
 
 // --- ★★★★★ ここに、あなたの情報を設定してください ★★★★★ ---
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-const CONFIG_SHEET_URL = 'ここにあなたのConfigシートの公開URLを再度貼り付けてください';
+const CONFIG_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRTcQPcqxP_kBk2hRewVCihac1ES891HEH_WwJyBDzcvMM0Q37xPz63b6XbKTWO1WuaG93D1J5FIkKV/pub?gid=0&single=true&output=csv';
 // --- 設定はここまで ---
 
 app.use(express.json());

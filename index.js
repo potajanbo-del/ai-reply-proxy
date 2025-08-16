@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 
-// ★★★★★ ここに、あなたのOpenAI APIキーを設定してください ★★★★★
-const OPENAI_API_KEY = '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';
+// ★★★★★ ここに、あなたの情報を設定してください ★★★★★ ---
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY; // Googleのサーバーから鍵を読み込む指示
 
 // ★★★★★ ここに、あなたのConfigシートの公開URLを設定してください ★★★★★
 const CONFIG_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRTcQPcqxP_kBk2hRewVCihac1ES891HEH_WwJyBDzcvMM0Q37xPz63b6XbKTWO1WuaG93D1J5FIkKV/pub?gid=0&single=true&output=csv';

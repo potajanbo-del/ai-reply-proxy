@@ -1,6 +1,6 @@
 const express = require('express');
-const cors = require('cors');
-// node-fetchの読み込み方を、新しい標準的な方法に変更しました
+const cors =require('cors');
+// node-fetchの読み込み方を、Cloud Runの最新環境に合わせた書き方に変更しました
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const app = express();
 

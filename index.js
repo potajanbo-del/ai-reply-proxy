@@ -1,6 +1,7 @@
 const express = require('express');
-const fetch = require('node-fetch');
-const cors = require('cors'); // 許可証の読み込み
+const cors = require('cors');
+// node-fetchの読み込み方を、新しい標準的な方法に変更しました
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const app = express();
 
 // --- ★★★★★ ここに、あなたの情報を設定してください ★★★★★ ---
@@ -9,7 +10,7 @@ const CONFIG_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRTcQP
 // --- 設定はここまで ---
 
 app.use(express.json());
-app.use(cors()); // ★★★ これが「どの場所からでも通信OK」という許可証です ★★★
+app.use(cors());
 
 let brainDirectory = null;
 

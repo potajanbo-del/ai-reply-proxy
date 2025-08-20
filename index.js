@@ -1,15 +1,37 @@
 const express = require('express');
 const fetch = require('node-fetch');
-const cors = require('cors'); // 許可証の読み込み
+const cors = require('cors');
 const app = express();
 
-// --- ★★★★★ ここに、あなたの情報を設定してください ★★★★★ ---
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-const CONFIG_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRTcQPcqxP_kBk2hRewVCihac1ES891HEH_WwJyBDzcvMM0Q37xPz63b6XbKTWO1WuaG93D1J5FIkKV/pub?gid=0&single=true&output=csv';
-// --- 設定はここまで ---
+const CONFIG_SHEET_URL = 'ここにあなたのConfigシートの公開URLを再度貼り付けてください';
 
 app.use(express.json());
-app.use(cors()); // ★★★ これが「どの場所からでも通信OK」という許可証です ★★★
+app.use(cors());
+
+// ▼▼▼ テスト専用の機能を追加 ▼▼▼
+app.post('/test-public-csv', async (req, res) => {
+    console.log("公開CSVの読み込みテストを開始します。");
+    // これは、誰でもアクセスできるサンプルCSVのURLです
+    const PUBLIC_CSV_URL = 'https://raw.githubusercontent.com/plotly/datasets/master/auto-mpg.csv';
+    try {
+        const response = await fetch(PUBLIC_CSV_URL);
+        if (!response.ok) {
+            throw new Error(`公開CSVの取得に失敗しました。ステータス: ${response.status}`);
+        }
+        const text = await response.text();
+        console.log("公開CSVの読み込みに成功しました。");
+        res.status(200).send({
+            status: "ok",
+            message: "成功！誰でもアクセスできる公開CSVを、サーバーは正しく読み込めました。",
+            data: text.substring(0, 200) + "..." // 冒頭200文字だけを返す
+        });
+    } catch (error) {
+        console.error("公開CSVテストでエラー:", error.message);
+        res.status(500).send({ error: error.message });
+    }
+});
+// ▲▲▲ テスト機能はここまで ▲▲▲
 
 let brainDirectory = null;
 
